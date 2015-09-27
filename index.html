@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Function Grapher (Lab)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+		<link rel="stylesheet" type="text/css" href="css/fonts.css"/>
+		<link rel="stylesheet" type="text/css" href="css/purplegui.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script src="lib/jquery/jquery.js"></script>
+		<script src="lib/expressionevaluator/expressionevaluator.js"></script>
+		<script src="lib/grapher/grapher.js"></script>
+		<script>
+			$(document).ready(function() {
+				var canvas = document.getElementById('canvas');
+				var grapher = new Grapher(canvas);
+
+				grapher.setPixelsPerUnit(50);
+				grapher.setOrigin(200, 200);
+				
+				// perform first sample function
+				grapher.clear();
+				grapher.drawGrid();
+				grapher.graph($('#txtFunction').val(), "#FFF", 2);
+
+				// perform function plot when button is clicked
+				$('#btnSubmit').click(function() {
+					grapher.clear();
+					grapher.drawGrid();
+					grapher.graph($('#txtFunction').val(), "#FFF", 2);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="purplebox-wrapper">
+            <div class="purplebox">
+                <span class="purplebox-title">GRAPHER</span>
+                <form action="#">
+                    <div class="purplebox-inputfield">
+                        <span class="purplebox-label">FUNCTION</span>
+                        <input type="text" class="purplebox-inputtext" id="txtFunction" value="cos(x*2)"/>
+                    </div>
+                    <div class="purplebox-buttonfield">
+                        <button id="btnSubmit" class="purplebox-button">DRAW</button>
+                    </div>
+                </form>
+            </div>
+            <br/>
+            <canvas id="canvas" width="400" height="400"></canvas>
+        </div>
+	</body>
+</html>
